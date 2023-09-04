@@ -1,3 +1,4 @@
+import os
 
 def main(input : str) -> tuple:
     length = len(input)
@@ -6,7 +7,6 @@ def main(input : str) -> tuple:
     while i < j and j < length:
         pos = input.find(input[j], i, j)
         if pos != -1:
-            print(input[j],input[i:j])
             i = pos + 1
         if j-i == 3 and part1 == None:
             part1 = j+1
@@ -27,14 +27,13 @@ if __name__ == '__main__':
         ('zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw',(11,26))
     ]
     input = None
-    with open('day_6_input.txt') as f:
+    base_path = os.path.dirname(__file__)
+    with open(f'{base_path}/day_6_input.txt') as f:
         input = f.readline()
-        print(input)
 
     for test,value in sample:
         v = main(test)
         assert v == value , f"Error in case << {test} >> \n  Expected : {str(value)} Got  : {str(v)}"
-    print('=====',input)
     v  = main(input)
-    print(f"Part 1 : {v}")
+    print(f"Part 1 and 2 : {v}")
 
