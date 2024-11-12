@@ -3,6 +3,7 @@
 //! is to delete this file and start with root.zig instead.
 const std = @import("std");
 const day1 = @import("day1.zig");
+const day2 = @import("day2.zig");
 pub fn main() !void {
     // Prints to stderr (it's a shortcut based on `std.io.getStdErr()`)
     std.debug.print("All your {s} are belong to us.\n", .{"codebase"});
@@ -18,6 +19,7 @@ pub fn main() !void {
 
     try bw.flush(); // Don't forget to flush!
     try day1.solve();
+    try day2.solve();
 }
 
 test "simple test" {
