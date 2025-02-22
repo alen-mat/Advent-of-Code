@@ -13,7 +13,7 @@ import my.prj.aoc_2024.Utils.Pair;
  * --- Day 4: Ceres Search ---
  * https://adventofcode.com/2024/day/4
  */
-public class Day04 implements ISolution {
+public class Day04 extends AbstractSolution{
 
     int part2Total = 0;
 
@@ -21,7 +21,7 @@ public class Day04 implements ISolution {
     int rowNum;
     int colNum;
 
-    Map<Pair, Set<Pair>> validPair = new HashMap<Pair, Set<Pair>>();
+    Map<Pair<Integer,Integer>, Set<Pair<Integer,Integer>>> validPair = new HashMap<>();
 
     String testInput = String.join("\n",
             "MMMSXXMASM",
@@ -35,9 +35,9 @@ public class Day04 implements ISolution {
             "MAMMMXMMMM",
             "MXMXAXMASX");
 
-    void hasValidXmas(Pair start) {
+    void hasValidXmas(Pair<Integer,Integer> start) {
         for (int[] c : Cordinate.getNeighbourMatrix(false)) {
-            Pair end = null;
+            Pair<Integer,Integer> end = null;
             StringBuilder sb = new StringBuilder();
             int i = 0;
             int xe = start.x + (c[0] * 0);
@@ -49,13 +49,13 @@ public class Day04 implements ISolution {
                 ye = start.y + (c[1] * i);
             }
             if (sb.length() == 4 && "XMAS".equals(sb.toString())) {
-                end = new Pair(xe, ye);
+                end = new Pair<Integer,Integer>(xe, ye);
             }
 
             if (end != null) {
-                Set<Pair> cordSet = validPair.get(start);
+                Set<Pair<Integer,Integer>> cordSet = validPair.get(start);
                 if (cordSet == null) {
-                    cordSet = new HashSet<Pair>();
+                    cordSet = new HashSet<Pair<Integer,Integer>>();
                     validPair.put(start, cordSet);
                 }
                 if (!cordSet.contains(end)) {
@@ -65,8 +65,8 @@ public class Day04 implements ISolution {
         }
     }
 
-    void hasValidMas(Pair start) {
-        Pair end = null;
+    void hasValidMas(Pair<Integer,Integer> start) {
+        Pair<Integer,Integer> end = null;
         StringBuilder sbMainDiag = new StringBuilder();
         StringBuilder sbAltDiag = new StringBuilder();
         int i = 0;
@@ -107,13 +107,13 @@ public class Day04 implements ISolution {
             for (int j = 0; j < inputLines[i].length(); j++) {
                 char s = inputLines[i].charAt(j);
                 if (s == 'X') {
-                    Pair start = new Pair(i, j);
+                    Pair<Integer,Integer> start = new Pair<Integer,Integer>(i, j);
                     hasValidXmas(start);
                 }
             }
         }
 
-        for (Map.Entry<Pair, Set<Pair>> e : validPair.entrySet()) {
+        for (Map.Entry<Pair<Integer,Integer>, Set<Pair<Integer,Integer>>> e : validPair.entrySet()) {
             count += e.getValue().size();
         }
         return count;
@@ -125,13 +125,13 @@ public class Day04 implements ISolution {
             for (int j = 0; j < inputLines[i].length(); j++) {
                 char s = inputLines[i].charAt(j);
                 if (s == 'A') {
-                    Pair start = new Pair(i, j);
+                    Pair<Integer,Integer> start = new Pair<Integer,Integer>(i, j);
                     hasValidMas(start);
                 }
             }
         }
 
-        for (Map.Entry<Pair, Set<Pair>> e : validPair.entrySet()) {
+        for (Map.Entry<Pair<Integer,Integer>, Set<Pair<Integer,Integer>>> e : validPair.entrySet()) {
             count += e.getValue().size();
         }
         return count;

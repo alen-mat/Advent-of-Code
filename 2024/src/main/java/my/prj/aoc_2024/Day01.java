@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Day01
  */
-public class Day01 implements ISolution {
+public class Day01 extends AbstractSolution {
     List<Integer> left = new ArrayList<Integer>();
     List<Integer> right = new ArrayList<Integer>();
 

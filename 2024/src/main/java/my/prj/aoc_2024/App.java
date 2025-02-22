@@ -19,8 +19,7 @@ public class App {
         InputStream stream = App.class.getResourceAsStream(packageName);
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
         return reader.lines()
-                .filter(line -> line.endsWith(".class"))
-                .filter(line -> line.startsWith("Day"))
+                .filter(line -> line.endsWith(".class") && line.startsWith("Day") && !line.contains("$"))
                 .map(line -> line.split("[.]")[0])
                 .sorted((c1, c2) -> c1.compareTo(c2))
                 .collect(Collectors.toList());
@@ -28,14 +27,14 @@ public class App {
 
     public static void main(String[] args) throws NoSuchMethodException, SecurityException, InstantiationException,
             IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException {
-        System.out.println("< AOC 2024 >");
+        System.out.println("---< AOC 2024 >---");
         List<String> solClasses = findAllSolClasses();
         Iterator<String> it = solClasses.iterator();
         while (it.hasNext()) {
             String cn = "my.prj.aoc_2024." + it.next();
             Class<?> c = Class.forName(cn);
             Constructor<?> con = c.getConstructor();
-            ISolution sol = (ISolution) con.newInstance();
+            AbstractSolution sol = (AbstractSolution) con.newInstance();
             sol.solve();
 
         }

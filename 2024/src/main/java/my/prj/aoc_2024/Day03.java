@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * Day03
  */
-public class Day03 implements ISolution {
+public class Day03 extends AbstractSolution{
     final String PATTERN1 = ".*?mul\\((\\d+),(\\d+)\\).*?";
     final Pattern p1 = Pattern.compile(PATTERN1);
 

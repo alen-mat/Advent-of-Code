@@ -5,8 +5,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
-public interface ISolution {
-    public default String getInput() {
+public abstract class AbstractSolution {
+    public AbstractSolution(){
+        System.out.println( this.getClass().getSimpleName());
+    }
+    public String getInput() {
         String file = "/" + this.getClass().getSimpleName() + ".txt";
         InputStream is = Day01.class.getResourceAsStream(file);
 
@@ -17,11 +20,11 @@ public interface ISolution {
         return input;
     }
 
-    public void solve();
+    public abstract void solve();
 
-    public default void displayVal(String part1, String part2) {
-        System.out.println(
-                this.getClass().getSimpleName() + "\n" + "  - Part 1 : " + part1 + "\n" + "  - Part 2 : " + part2);
+    public void displayVal(String part1, String part2) {
+        System.out.println("  - Part 1 : " + part1 + "\n" + "  - Part 2 : " + part2);
+        System.out.println();
     }
 
 }

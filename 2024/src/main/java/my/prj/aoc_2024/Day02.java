@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * --- Day 2: Red-Nosed Reports ---
  * `https://adventofcode.com/2024/day/2`
  */
-public class Day02 implements ISolution {
+public class Day02 extends AbstractSolution{
     Object[] isSafe(List<Integer> vals) {
         int i = 0, j = i + 1;
         Boolean shouldBePos = null;
